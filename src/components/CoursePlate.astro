@@ -1,0 +1,135 @@
+---
+import { Image } from "astro:assets";
+import { salon, yen, type Course } from "../data/salon";
+import LineLink from "./LineLink.astro";
+
+interface Props {
+  course: Course;
+}
+
+const { course } = Astro.props;
+const line = salon.line.url;
+const sizes = {
+  "01": "(min-width: 900px) 62vw, 100vw",
+  "02": "(min-width: 900px) 54vw, 100vw",
+  "03": "(min-width: 900px) 42vw, 92vw",
+  "04": "(min-width: 900px) 16rem, 72vw",
+  "05": "(min-width: 900px) 18rem, 72vw",
+} as const;
+---
+
+<article class={`plate plate--${course.id}`} id={`course-${course.id}`} data-plate={course.id}>
+  {course.id === "01" && (
+    <>
+      <span id="menu" class="jump"></span>
+      <div class="plate01__copy">
+        <div class="plate01__head">
+          <p class="idx">01</p>
+          <h2 class="mincho plate01__title">最新痩身マシーン<br />フルコース</h2>
+        </div>
+        <div class="plate01__bottom">
+          <p class="catch">{course.catch}</p>
+          <ul class="treat">
+            {course.lines?.map((lineItem) => <li>{lineItem}</li>)}
+          </ul>
+          <p class="plate01__price num">{yen(course.price)}</p>
+          <LineLink href={line} />
+        </div>
+      </div>
+      <div class="plate01__media">
+        <Image src={course.image} alt={course.alt} class="plate__img" widths={[640, 960, 1400]} sizes={sizes["01"]} />
+      </div>
+    </>
+  )}
+
+  {course.id === "02" && (
+    <>
+      <figure class="plate02__media">
+        <Image src={course.image} alt={course.alt} class="plate__img" widths={[640, 960, 1400]} sizes={sizes["02"]} />
+      </figure>
+      <div class="plate02__copy">
+        <p class="idx">02</p>
+        <h2 class="mincho">{course.title}</h2>
+        <p class="catch">{course.catch}</p>
+        <p class="plate02__meta">
+          <span class="num plate02__price">{yen(course.price)}</span>
+          <span>{course.duration}</span>
+        </p>
+        <div class="steps">
+          <span class="steps__line" data-step-line></span>
+          <ol>
+            {course.steps?.map((step) => <li>{step}</li>)}
+          </ol>
+        </div>
+        <LineLink href={line} />
+      </div>
+    </>
+  )}
+
+  {course.id === "03" && (
+    <>
+      <div class="plate03__copy">
+        <p class="idx">03</p>
+        <h2 class="mincho">{course.title}</h2>
+        <p class="catch catch--lg">太ももやお腹の、<br />しつこいセルライトに。</p>
+        <ul class="plain plain--ink">
+          {course.lines?.map((lineItem) => <li>{lineItem}</li>)}
+        </ul>
+        <p class="num plate03__price">{yen(course.price)}</p>
+        <LineLink href={line} />
+      </div>
+      <figure class="plate03__media" data-tilt>
+        <Image src={course.image} alt={course.alt} class="plate__img" widths={[640, 960, 1280]} sizes={sizes["03"]} />
+      </figure>
+    </>
+  )}
+
+  {course.id === "04" && (
+    <>
+      <div class="plate04__stage">
+        <svg class="ring" viewBox="0 0 200 200" aria-hidden="true">
+          <circle data-ring cx="100" cy="100" r="92" fill="none" stroke="currentColor" stroke-width="0.7"></circle>
+        </svg>
+        <p class="plate04__count">
+          <span class="plate04__one">1</span>
+          <span class="plate04__per">/ 月</span>
+        </p>
+        <p class="plate04__limit">{course.note}</p>
+      </div>
+      <div class="plate04__aside">
+        <p class="idx">04</p>
+        <h2 class="mincho plate04__title">1ヶ月<br />集中コース</h2>
+        <p class="catch">{course.catch}</p>
+        <ul class="plain">
+          {course.lines?.map((lineItem) => <li>{lineItem}</li>)}
+        </ul>
+        <p class="num plate04__price">{yen(course.price)}</p>
+        <LineLink href={line} />
+        <Image src={course.image} alt={course.alt} class="plate__img plate04__img" widths={[480, 720]} sizes={sizes["04"]} />
+      </div>
+    </>
+  )}
+
+  {course.id === "05" && (
+    <>
+      <div class="plate05__copy">
+        <p class="idx">05</p>
+        <h2 class="mincho plate05__title">{course.title}</h2>
+        <p class="plate05__meta">{course.catch}</p>
+        <p class="price-was">
+          <span class="price-was__label">通常</span>
+          <span class="price-was__value num">
+            {course.compareAt ? yen(course.compareAt) : ""}
+            <span class="price-was__strike" data-strike></span>
+          </span>
+        </p>
+        <p class="price-now num" data-price-now>{yen(course.price)}</p>
+        <p class="note">効果には個人差があります。</p>
+        <LineLink href={line} />
+      </div>
+      <figure class="plate05__media">
+        <Image src={course.image} alt={course.alt} class="plate__img" widths={[480, 800]} sizes={sizes["05"]} />
+      </figure>
+    </>
+  )}
+</article>

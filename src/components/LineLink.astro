@@ -1,0 +1,22 @@
+---
+import BrandIcon from "./BrandIcon.astro";
+
+interface Props {
+  href: string;
+  class?: string;
+  hero?: boolean;
+}
+
+const { href, class: className, hero = false } = Astro.props;
+---
+
+<a
+  class:list={["line-btn", className]}
+  href={href}
+  target="_blank"
+  rel="noopener noreferrer"
+  data-hero-reserve={hero ? "" : undefined}
+>
+  <BrandIcon brand="line" />
+  <span>LINEで予約</span>
+</a>

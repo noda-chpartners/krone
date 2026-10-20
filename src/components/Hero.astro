@@ -1,0 +1,46 @@
+---
+import { Image } from "astro:assets";
+import hero from "../assets/hero.jpg";
+import { courses, salon } from "../data/salon";
+import LineLink from "./LineLink.astro";
+---
+
+<section class="hero" id="top" data-hero>
+  <div class="hero__copy">
+    <p class="hero__place">豊田市・末野原</p>
+    <h1 class="hero__title">
+      <span class="hero__mark-clip">
+        <span class="hero__mark" data-hero-mark>Krone</span>
+      </span>
+      <span class="hero__ruby">エステティックサロン【クローネ】</span>
+    </h1>
+    <p class="hero__lead">最新マシンで、<br />落ちない脂肪にアプローチ。</p>
+    <div class="hero__meta">
+      <a class="hero__tel" href={salon.telHref}>{salon.tel}</a>
+      <LineLink href={salon.line.url} hero />
+    </div>
+  </div>
+  <div class="hero__frame">
+    <div class="hero__photo" data-hero-photo>
+      <Image
+        src={hero}
+        alt="夜の施術室。一点の光が当たった、空のチェア。"
+        class="hero__img"
+        widths={[720, 1080, 1440]}
+        sizes="(min-width: 900px) 58vw, 100vw"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
+  </div>
+  <div class="hero__foot">
+    <span class="hero__rule" data-hero-rule></span>
+    <nav class="hero__index" aria-label="コース">
+      {
+        courses.map((course) => (
+          <a href={`#course-${course.id}`}>{course.id}</a>
+        ))
+      }
+    </nav>
+  </div>
+</section>

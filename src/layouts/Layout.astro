@@ -1,0 +1,73 @@
+---
+import "../styles/global.css";
+import "lenis/dist/lenis.css";
+import { getImage } from "astro:assets";
+import hero from "../assets/hero.jpg";
+import { salon } from "../data/salon";
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const ogImage = await getImage({ src: hero, width: 1200, height: 630 });
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BeautySalon",
+  name: salon.legalName,
+  telephone: salon.tel,
+  image: ogImage.src,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: `${salon.street}${salon.building}`,
+    addressLocality: salon.locality,
+    addressRegion: salon.region,
+    addressCountry: "JP",
+  },
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      opens: "10:00",
+      closes: "23:00",
+    },
+  ],
+  sameAs: [salon.instagram.url, salon.line.url],
+};
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#100e0c" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ja_JP" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage.src} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=IBM+Plex+Sans+JP:wght@400;500&family=Shippori+Mincho:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+    <noscript>
+      <style>
+        .reserve { opacity: 1; visibility: visible; }
+      </style>
+    </noscript>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

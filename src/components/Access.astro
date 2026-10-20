@@ -1,0 +1,64 @@
+---
+import { mapEmbedSrc, mapLink, salon } from "../data/salon";
+import BrandIcon from "./BrandIcon.astro";
+import LineLink from "./LineLink.astro";
+---
+
+<section class="access" id="access" data-access>
+  <div class="access__place">
+    <p class="idx">Access</p>
+    <h2 class="mincho">
+      <span>{salon.locality}</span>
+      {salon.street}
+    </h2>
+    <p class="access__building">{salon.building}</p>
+    <p class="access__station">{salon.station}</p>
+    <a class="access__tel" href={salon.telHref}>{salon.tel}</a>
+    <LineLink class="access__line" href={salon.line.url} />
+    <div class="access__map">
+      <iframe title="エステティックサロンKroneの地図" src={mapEmbedSrc} loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <a class="text-link access__maplink" href={mapLink} target="_blank" rel="noopener noreferrer">地図を開く</a>
+  </div>
+  <div class="access__ledger">
+    <dl class="hours">
+      <div class="hours__row">
+        <dt>月–金</dt>
+        <dd>10:00–23:00</dd>
+      </div>
+      <div class="hours__row">
+        <dt>土</dt>
+        <dd>10:00–23:00</dd>
+      </div>
+      <div class="hours__row hours__row--closed" data-closed>
+        <dt>日</dt>
+        <dd>定休日</dd>
+        <span data-closed-strike></span>
+      </div>
+      <div class="hours__row hours__row--closed" data-closed>
+        <dt>祝</dt>
+        <dd>定休日</dd>
+        <span data-closed-strike></span>
+      </div>
+      <div class="hours__row">
+        <dt>席</dt>
+        <dd>2</dd>
+      </div>
+    </dl>
+    <ul class="access__links">
+      <li>
+        <a href={salon.instagram.url} target="_blank" rel="noopener noreferrer">
+          <span class="access__brand"><BrandIcon brand="instagram" />Instagram</span>
+          <span>{salon.instagram.handle}</span>
+        </a>
+      </li>
+      <li>
+        <a href={salon.line.url} target="_blank" rel="noopener noreferrer">
+          <span class="access__brand"><BrandIcon brand="line" />LINE</span>
+          <span>{salon.line.id}</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <p class="colophon">{salon.legalName}</p>
+</section>

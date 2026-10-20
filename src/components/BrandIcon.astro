@@ -1,0 +1,19 @@
+---
+import { siInstagram, siLine } from "simple-icons";
+
+interface Props {
+  brand: "line" | "instagram";
+}
+
+const icons = {
+  line: siLine,
+  instagram: siInstagram,
+} as const;
+
+const { brand } = Astro.props;
+const icon = icons[brand];
+---
+
+<svg class:list={["brand-icon", `brand-icon--${brand}`]} viewBox="0 0 24 24" aria-hidden="true">
+  <path fill="currentColor" d={icon.path}></path>
+</svg>

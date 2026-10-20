@@ -1,0 +1,20 @@
+---
+import Crown from "./Crown.astro";
+import BrandIcon from "./BrandIcon.astro";
+import { salon } from "../data/salon";
+---
+
+<aside class="rail" data-rail>
+  <a class="rail__brand" href="#top" data-rail-item>
+    <Crown />
+    <span class="rail__name">Krone</span>
+  </a>
+  <nav class="rail__nav" aria-label="ページ内">
+    <a href="#menu" data-rail-item>Menu</a>
+    <a href="#access" data-rail-item>Access</a>
+  </nav>
+  <a class="rail__book" href={salon.line.url} target="_blank" rel="noopener noreferrer" data-rail-item>
+    <BrandIcon brand="line" />
+    LINEで予約
+  </a>
+</aside>

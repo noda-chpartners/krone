@@ -14,6 +14,7 @@ export const salon = {
   building: "カレント101",
   locality: "豊田市",
   region: "愛知県",
+  postalCode: "470-1206",
   station: "愛知環状鉄道 末野原駅 徒歩15分",
   instagram: {
     handle: "krone.beauty",

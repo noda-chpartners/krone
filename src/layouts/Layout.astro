@@ -3,7 +3,7 @@ import "../styles/global.css";
 import "lenis/dist/lenis.css";
 import { getImage } from "astro:assets";
 import hero from "../assets/hero.jpg";
-import { salon } from "../data/salon";
+import { courses, mapLink, salon } from "../data/salon";
 
 interface Props {
   title: string;
@@ -11,20 +11,34 @@ interface Props {
 }
 
 const { title, description } = Astro.props;
+const site = Astro.site ?? new URL("https://aesthetic-krone.pages.dev");
+const canonical = new URL(Astro.url.pathname, site).href;
 const ogImage = await getImage({ src: hero, width: 1200, height: 630 });
+const imageUrl = new URL(ogImage.src, site).href;
+const ogAlt = "エステティックサロンKroneの施術室";
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "BeautySalon",
+  "@id": new URL("/#salon", site).href,
   name: salon.legalName,
-  telephone: salon.tel,
-  image: ogImage.src,
+  url: canonical,
+  telephone: "+81-565-41-6696",
+  image: imageUrl,
+  priceRange: "¥16,500–¥55,000",
+  currenciesAccepted: "JPY",
   address: {
     "@type": "PostalAddress",
-    streetAddress: `${salon.street}${salon.building}`,
+    postalCode: salon.postalCode,
+    streetAddress: `${salon.street} ${salon.building}`,
     addressLocality: salon.locality,
     addressRegion: salon.region,
     addressCountry: "JP",
+  },
+  hasMap: mapLink,
+  areaServed: {
+    "@type": "City",
+    name: salon.locality,
   },
   openingHoursSpecification: [
     {
@@ -35,6 +49,21 @@ const jsonLd = {
     },
   ],
   sameAs: [salon.instagram.url, salon.line.url],
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "コース",
+    itemListElement: courses.map((course) => ({
+      "@type": "Offer",
+      price: String(course.price),
+      priceCurrency: "JPY",
+      url: new URL(`/#course-${course.id}`, site).href,
+      itemOffered: {
+        "@type": "Service",
+        name: course.id === "01" ? "最新痩身マシーン フルコース" : course.title,
+        description: [course.catch, ...(course.lines ?? course.steps ?? [])].join("、"),
+      },
+    })),
+  },
 };
 ---
 
@@ -46,13 +75,24 @@ const jsonLd = {
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#100e0c" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="ja_JP" />
+    <meta property="og:site_name" content={salon.legalName} />
+    <meta property="og:url" content={canonical} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImage.src} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:width" content={String(ogImage.attributes.width)} />
+    <meta property="og:image:height" content={String(ogImage.attributes.height)} />
+    <meta property="og:image:alt" content={ogAlt} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+    <meta name="twitter:image:alt" content={ogAlt} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -60,7 +100,7 @@ const jsonLd = {
       href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=IBM+Plex+Sans+JP:wght@400;500&family=Shippori+Mincho:wght@500;600&display=swap"
       rel="stylesheet"
     />
-    <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd).replace(/</g, "\\u003c")} />
     <noscript>
       <style>
         .reserve { opacity: 1; visibility: visible; }

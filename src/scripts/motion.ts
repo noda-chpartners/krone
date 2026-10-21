@@ -103,23 +103,6 @@ export function initMotion() {
         },
       );
 
-      if (desktop) {
-        gsap.fromTo(
-          "[data-tilt]",
-          { rotation: 4 },
-          {
-            rotation: 2.5,
-            ease: "none",
-            scrollTrigger: {
-              trigger: "[data-plate='03']",
-              start: "top bottom",
-              end: "center center",
-              scrub: 0.6,
-            },
-          },
-        );
-      }
-
       const ring = document.querySelector<SVGCircleElement>("[data-ring]");
       if (ring) {
         const length = ring.getTotalLength();

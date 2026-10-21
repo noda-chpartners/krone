@@ -21,8 +21,7 @@ export function initMotion() {
       const desktop = Boolean(context.conditions?.desktop);
 
       if (reduce) {
-        gsap.set("[data-strike], [data-closed-strike]", { scaleX: 1, transformOrigin: "left center" });
-        gsap.set("[data-price-now], [data-reserve]", { autoAlpha: 1 });
+        gsap.set("[data-reserve]", { autoAlpha: 1 });
         return;
       }
 
@@ -99,91 +98,6 @@ export function initMotion() {
             trigger: "[data-plate='02']",
             start: "top 70%",
             toggleActions: "play none none reverse",
-          },
-        },
-      );
-
-      const ring = document.querySelector<SVGCircleElement>("[data-ring]");
-      if (ring) {
-        const length = ring.getTotalLength();
-        gsap.set(ring, { strokeDasharray: length, strokeDashoffset: length });
-
-        if (desktop) {
-          gsap.to(ring, {
-            strokeDashoffset: 0,
-            ease: "none",
-            scrollTrigger: {
-              trigger: "[data-plate='04']",
-              start: "top top",
-              end: "+=80%",
-              pin: true,
-              scrub: 0.6,
-              anticipatePin: 1,
-            },
-          });
-        } else {
-          gsap.to(ring, {
-            strokeDashoffset: 0,
-            duration: 1.2,
-            scrollTrigger: {
-              trigger: "[data-plate='04']",
-              start: "top 70%",
-              toggleActions: "play none none none",
-            },
-          });
-        }
-      }
-
-      const priceTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: "[data-plate='05']",
-          start: "top 70%",
-          toggleActions: "play none none none",
-        },
-      });
-
-      priceTl
-        .fromTo(
-          "[data-strike]",
-          { scaleX: 0 },
-          { scaleX: 1, duration: 0.7, ease: "power2.inOut", transformOrigin: "left center" },
-        )
-        .fromTo(
-          "[data-price-now]",
-          { autoAlpha: 0 },
-          { autoAlpha: 1, duration: 0.45 },
-          "-=0.15",
-        );
-
-      gsap.fromTo(
-        "[data-closed-strike]",
-        { scaleX: 0 },
-        {
-          scaleX: 1,
-          duration: 0.7,
-          ease: "power2.inOut",
-          stagger: 0.08,
-          transformOrigin: "left center",
-          scrollTrigger: {
-            trigger: "[data-access]",
-            start: "top 70%",
-            toggleActions: "play none none none",
-          },
-        },
-      );
-
-      gsap.fromTo(
-        "[data-fact]",
-        { y: 28 },
-        {
-          y: 0,
-          ease: "none",
-          stagger: 0.08,
-          scrollTrigger: {
-            trigger: "[data-facts]",
-            start: "top 85%",
-            end: "center center",
-            scrub: 0.6,
           },
         },
       );

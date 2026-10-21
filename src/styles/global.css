@@ -100,12 +100,15 @@ a {
   letter-spacing: 0.22em;
 }
 
-.line-btn {
+.line-btn,
+.hotpepper-btn {
   display: inline-flex;
   gap: 0.5rem;
   align-items: center;
   justify-content: center;
   width: fit-content;
+  max-width: 100%;
+  min-height: 44px;
   padding: 0.78rem 1.15rem;
   border-radius: 999px;
   background: var(--line);
@@ -120,6 +123,34 @@ a {
 .line-btn:hover {
   background: #05b34c;
   color: var(--ink);
+}
+
+.hotpepper-btn {
+  background: #ac3155;
+
+  color: #fff;
+}
+.hotpepper-btn:hover {
+  background: #8e2545;
+}
+.booking-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  max-width: 100%;
+}
+.booking-links--compact {
+  flex-wrap: nowrap;
+  gap: 0.4rem;
+}
+.booking-links--compact a {
+  padding: 0.65rem 0.8rem;
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+.booking-links--compact .brand-icon {
+  width: 1rem;
+  height: 1rem;
 }
 
 .brand-icon {
@@ -223,23 +254,8 @@ a {
   color: var(--gold);
 }
 
-.rail__book {
+.rail__booking {
   display: none;
-  gap: 0.35rem;
-  align-items: center;
-  padding: 0.35rem 0.7rem;
-  border-radius: 999px;
-  background: var(--line);
-  color: var(--ink);
-  font-size: 0.68rem;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  text-decoration: none;
-}
-
-.rail__book .brand-icon {
-  width: 0.9rem;
-  height: 0.9rem;
 }
 
 .hero {
@@ -424,7 +440,7 @@ a {
   align-items: flex-start;
 }
 
-.plate01__bottom .line-btn {
+.plate01__bottom .booking-links {
   margin-top: 0.65rem;
 }
 
@@ -533,7 +549,8 @@ a {
   line-height: 1.35;
 }
 
-.plate--03 {
+.plate--03,
+.plate--simple {
   display: grid;
   grid-template-columns: minmax(16rem, 0.75fr) minmax(0, 1.25fr);
   gap: 4vw;
@@ -569,10 +586,8 @@ a {
   font-size: clamp(2.2rem, 4vw, 3.4rem);
 }
 
-.plate03__copy .line-btn,
-.plate04__aside .line-btn,
-.plate05__copy .line-btn,
-.plate02__copy .line-btn {
+.plate03__copy .booking-links,
+.plate02__copy .booking-links {
   margin-top: 1.75rem;
 }
 
@@ -591,222 +606,34 @@ a {
   object-position: center;
 }
 
-.facts {
-  padding: 9vh 3.2vw 10vh;
-  background: var(--ink);
-  border-top: 1px solid var(--gold-dim);
-}
-
-.facts__where {
-  margin-bottom: 2.5rem;
-  color: var(--gold);
-  font-size: 0.72rem;
-  letter-spacing: 0.22em;
-}
-
-.facts__nums {
-  display: flex;
-  gap: 2rem;
-  align-items: flex-end;
-  justify-content: space-between;
-}
-
-.facts__nums p {
-  margin: 0;
-}
-
-.facts__nums strong {
-  display: block;
-  font-family: var(--display);
-  font-size: clamp(4.5rem, 12vw, 10rem);
-  font-weight: 500;
-  line-height: 0.8;
-  letter-spacing: -0.05em;
-}
-
-.facts__nums span {
-  display: block;
-  margin-top: 0.85rem;
-  color: var(--gold);
-  font-size: 0.72rem;
-  letter-spacing: 0.2em;
-}
-
-.plate--04 {
-  display: grid;
-  grid-template-columns: minmax(16rem, 0.72fr) minmax(0, 1.28fr);
-  gap: 3vw;
-  align-items: center;
-  min-height: 88svh;
-  padding: 6vh 1.5rem 6vh 2.4vw;
+.plate--simple {
+  border-top: 1px solid rgba(16, 14, 12, 0.12);
+  color: var(--paper);
   background: var(--ink);
 }
 
-.plate04__stage {
-  position: relative;
-  display: grid;
-  width: min(100%, 16rem);
-  margin-bottom: 1.4rem;
-  place-items: center;
+.plate--simple .plain li {
+  border-top-color: rgba(239, 230, 214, 0.18);
 }
-
-.ring {
-  grid-area: 1 / 1;
-  width: 100%;
-  height: auto;
-  color: var(--gold);
-}
-
-.plate04__count {
-  position: relative;
-  grid-area: 1 / 1;
-  margin: 0;
-}
-
-.plate04__one {
-  font-family: var(--display);
-  font-size: clamp(4.2rem, 7vw, 6.4rem);
-  font-weight: 500;
-  line-height: 0.8;
-  letter-spacing: -0.05em;
-}
-
-.plate04__per {
-  position: absolute;
-  bottom: 0.85rem;
-  left: calc(100% + 0.45rem);
-  font-family: var(--mincho);
-  font-size: 1.25rem;
-  color: var(--gold);
-  letter-spacing: 0.14em;
-  white-space: nowrap;
-}
-
-.plate04__limit {
-  grid-area: 2 / 1;
-  margin: 0.85rem 0 0;
-  font-size: 0.75rem;
-  letter-spacing: 0.22em;
-}
-
-.plate04__title {
-  font-size: clamp(2.2rem, 3.6vw, 3.6rem);
-}
-
-.plate04__aside {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.plate04__media {
-  display: flex;
-  align-items: center;
-  min-width: 0;
-  width: 100%;
-}
-
-.plate04__media .plate__img {
-  width: 100%;
-  height: auto;
-  max-height: 82svh;
-  object-fit: contain;
-  object-position: center;
-}
-
-.plate04__aside .plain {
-  width: min(100%, 22rem);
-  margin-top: 1.25rem;
-}
-
-.plate04__price {
-  margin-top: 1.75rem;
-  font-size: clamp(2.4rem, 4vw, 3.6rem);
-}
-
-.plate--05 {
-  display: grid;
-  grid-template-columns: minmax(17rem, 0.78fr) minmax(0, 1.22fr);
-  gap: 3vw;
-  align-items: center;
-  min-height: 88svh;
-  padding: 8vh 1.5rem 8vh 3.2vw;
-  background: var(--ink);
-}
-
-.plate05__copy {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.plate05__meta {
-  margin-top: 0.7rem;
-  letter-spacing: 0.08em;
-}
-
-.price-was {
-  position: relative;
+.course-title-part {
   display: inline-block;
+}
+
+.course-limit {
+  margin-top: 1rem;
+  color: var(--gold);
+  font-size: 0.85rem;
+}
+.course-compare {
   margin-top: 1.5rem;
-}
-
-.price-was__label {
-  display: block;
-  margin-bottom: 0.35rem;
   color: var(--mute);
-  font-size: 0.72rem;
-  letter-spacing: 0.2em;
+  font-size: 1rem;
+  font-variant-numeric: tabular-nums;
 }
-
-.price-was__value {
-  position: relative;
-  display: inline-block;
-  max-width: 100%;
-  font-size: clamp(2.4rem, 6.4vw, 6.2rem);
-  color: rgba(239, 230, 214, 0.38);
-}
-
-.price-was__strike {
-  position: absolute;
-  top: 54%;
-  right: 0;
-  left: 0;
-  height: 3px;
-  background: var(--gold);
-  transform-origin: left center;
-}
-
-.price-now {
-  margin-top: 1.35rem;
-  font-size: clamp(2.2rem, 5vw, 4.2rem);
-  color: var(--gold);
-}
-
 .note {
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   color: var(--mute);
   font-size: 0.75rem;
-  letter-spacing: 0.06em;
-}
-
-.plate05__copy .line-btn {
-  margin-top: 1.75rem;
-}
-
-.plate05__media {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  min-width: 0;
-}
-
-.plate05__media .plate__img {
-  width: 100%;
-  height: auto;
-  max-height: 82svh;
-  object-fit: contain;
-  object-position: center;
 }
 
 .access {
@@ -825,13 +652,8 @@ a {
   letter-spacing: 0.06em;
 }
 
-.access h2 span {
-  display: block;
-  margin-bottom: 0.25rem;
-  font-family: var(--sans);
-  font-size: 0.75rem;
-  font-weight: 400;
-  letter-spacing: 0.22em;
+.access__address {
+  margin-top: 1.25rem;
 }
 
 .access__building,
@@ -874,22 +696,19 @@ a {
   margin-top: 1rem;
 }
 
-.access__line {
-  display: flex;
+.access__booking {
   margin-top: 1.75rem;
 }
 
 .hero,
 .plate,
-.facts,
 .access {
   max-width: 100%;
 }
 
 .hero > *,
 .plate > *,
-.access > *,
-.facts__nums > * {
+.access > * {
   min-width: 0;
 }
 
@@ -897,7 +716,6 @@ a {
 .plate--03,
 .plate--04,
 .plate--05,
-.facts,
 .access,
 .hero {
   overflow-x: clip;
@@ -909,7 +727,7 @@ iframe {
 }
 
 .access__ledger {
-  padding-right: 6rem;
+  padding-right: 0;
 }
 
 .hours__row {
@@ -928,21 +746,6 @@ iframe {
 
 .hours dd {
   font-variant-numeric: tabular-nums;
-}
-
-.hours__row--closed {
-  color: rgba(16, 14, 12, 0.42);
-}
-
-[data-closed-strike] {
-  position: absolute;
-  top: 50%;
-  right: 0;
-  left: 0;
-  z-index: 1;
-  height: 2px;
-  background: #a68456;
-  transform-origin: left center;
 }
 
 .access__links {
@@ -966,7 +769,7 @@ iframe {
 
 .colophon {
   grid-column: 1 / -1;
-  margin-top: 8vh;
+  margin-top: 2rem;
   padding-top: 1.4rem;
   border-top: 1px solid rgba(16, 14, 12, 0.16);
   font-size: 0.72rem;
@@ -978,28 +781,13 @@ iframe {
   right: max(1.25rem, env(safe-area-inset-right));
   bottom: max(1.25rem, env(safe-area-inset-bottom));
   z-index: 40;
-  display: grid;
-  width: 4.5rem;
-  height: 4.5rem;
-  place-items: center;
-  border-radius: 50%;
-  background: var(--line);
-  color: var(--paper);
-  font-size: 0.68rem;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-decoration: none;
+  padding: 0.5rem;
+  border: 1px solid var(--gold-dim);
+  border-radius: 0.85rem;
+  background: var(--ink);
+  box-shadow: 0 4px 24px #0003;
   opacity: 0;
   visibility: hidden;
-}
-
-.reserve .brand-icon {
-  width: 1.85rem;
-  height: 1.85rem;
-}
-
-.reserve:hover {
-  background: #12d66a;
 }
 
 @media (max-width: 899px) {
@@ -1009,7 +797,6 @@ iframe {
   }
 
   .plate,
-  .facts,
   .access {
     scroll-margin-top: 48px;
   }
@@ -1040,8 +827,56 @@ iframe {
     display: none;
   }
 
-  .rail__book {
-    display: inline-flex;
+  .rail__booking {
+    display: flex;
+  }
+  .rail {
+    gap: 0.5rem;
+    padding-inline: 0.75rem;
+  }
+  .rail__brand {
+    gap: 0.4rem;
+  }
+  .rail__name {
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+  }
+  .rail__booking a {
+    min-height: 34px;
+    padding: 0.5rem;
+    font-size: 0.65rem;
+    gap: 0.3rem;
+  }
+  body {
+    padding-bottom: calc(80px + env(safe-area-inset-bottom));
+  }
+  .booking-links:not(.booking-links--compact) {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+    max-width: 26rem;
+  }
+  .booking-links:not(.booking-links--compact) a {
+    width: 100%;
+  }
+  .hero__meta {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .reserve {
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 0.65rem 1rem calc(0.65rem + env(safe-area-inset-bottom));
+    border-radius: 0;
+    border-width: 1px 0 0;
+  }
+  .reserve .booking-links {
+    display: grid;
+    grid-template-columns: 1fr 1.35fr;
+  }
+  .reserve a {
+    width: 100%;
   }
 
   .hero {
@@ -1114,6 +949,7 @@ iframe {
 
   .plate--02,
   .plate--03,
+  .plate--04,
   .plate--05 {
     min-height: 0;
     padding: 3.5rem 1.25rem;
@@ -1127,7 +963,8 @@ iframe {
     order: -1;
   }
 
-  .plate--03 {
+  .plate--03,
+  .plate--simple {
     gap: 1.75rem;
   }
 
@@ -1136,31 +973,8 @@ iframe {
     width: 100%;
   }
 
-  .plate03__media .plate__img,
-  .plate04__media .plate__img,
-  .plate05__media .plate__img {
+  .plate03__media .plate__img {
     max-height: none;
-  }
-
-  .facts {
-    padding: 4.5rem 1.25rem;
-  }
-
-  .facts__nums strong {
-    font-size: clamp(3.4rem, 18vw, 5rem);
-  }
-
-  .plate--04 {
-    min-height: 0;
-    padding: 3rem 1.25rem 3.5rem;
-  }
-
-  .plate04__stage {
-    width: min(100%, 14rem);
-  }
-
-  .plate05__media {
-    margin-top: 0.5rem;
   }
 
   .access {
@@ -1169,13 +983,9 @@ iframe {
 
   .access__ledger {
     margin-top: 0.5rem;
-    padding-right: 4.75rem;
+    padding-right: 0;
   }
 
-  .plate04__media,
-  .plate05__media {
-    margin-bottom: 4.5rem;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

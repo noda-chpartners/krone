@@ -1,0 +1,23 @@
+---
+import { salon } from "../data/salon";
+import BrandIcon from "./BrandIcon.astro";
+
+interface Props {
+  class?: string;
+  hero?: boolean;
+  compact?: boolean;
+}
+
+const { class: className, hero = false, compact = false } = Astro.props;
+---
+
+<div class:list={["booking-links", { "booking-links--compact": compact }, className]} data-hero-reserve={hero ? "" : undefined}>
+  <a class="line-btn" href={salon.line.url} target="_blank" rel="noopener noreferrer" aria-label="LINEで予約（新しいタブで開きます）">
+    <BrandIcon brand="line" />
+    <span>{compact ? "LINE予約" : "LINEで予約"}</span>
+  </a>
+  <a class="hotpepper-btn" href={salon.hotpepper.url} target="_blank" rel="noopener noreferrer" aria-label="ホットペッパービューティーで予約（新しいタブで開きます）">
+    <span>{compact ? "ホットペッパー" : "ホットペッパーで予約"}</span>
+    <span aria-hidden="true">↗</span>
+  </a>
+</div>

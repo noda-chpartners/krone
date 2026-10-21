@@ -1,20 +1,18 @@
 ---
 import { mapEmbedSrc, mapLink, salon } from "../data/salon";
 import BrandIcon from "./BrandIcon.astro";
-import LineLink from "./LineLink.astro";
+import BookingLinks from "./BookingLinks.astro";
 ---
 
 <section class="access" id="access" data-access>
   <div class="access__place">
     <p class="idx">Access</p>
-    <h2 class="mincho">
-      <span>{salon.locality}</span>
-      {salon.street}
-    </h2>
+    <h2 class="mincho">店舗情報</h2>
+    <p class="access__address">{salon.region}{salon.locality}{salon.street}</p>
     <p class="access__building">{salon.building}</p>
     <p class="access__station">{salon.station}</p>
     <a class="access__tel" href={salon.telHref}>{salon.tel}</a>
-    <LineLink class="access__line" href={salon.line.url} />
+    <BookingLinks class="access__booking" />
     <div class="access__map">
       <iframe title="エステティックサロンKroneの地図" src={mapEmbedSrc} loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
@@ -30,19 +28,17 @@ import LineLink from "./LineLink.astro";
         <dt>土</dt>
         <dd>10:00–23:00</dd>
       </div>
-      <div class="hours__row hours__row--closed" data-closed>
+      <div class="hours__row">
         <dt>日</dt>
         <dd>定休日</dd>
-        <span data-closed-strike></span>
-      </div>
-      <div class="hours__row hours__row--closed" data-closed>
-        <dt>祝</dt>
-        <dd>定休日</dd>
-        <span data-closed-strike></span>
       </div>
       <div class="hours__row">
-        <dt>席</dt>
-        <dd>2</dd>
+        <dt>祝</dt>
+        <dd>定休日</dd>
+      </div>
+      <div class="hours__row">
+        <dt>席数</dt>
+        <dd>2席</dd>
       </div>
     </dl>
     <ul class="access__links">

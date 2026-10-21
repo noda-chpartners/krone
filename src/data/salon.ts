@@ -24,6 +24,9 @@ export const salon = {
     id: "@aig8692e",
     url: "https://line.me/R/ti/p/@aig8692e",
   },
+  hotpepper: {
+    url: "https://beauty.hotpepper.jp/kr/slnH000372919/",
+  },
 } as const;
 
 export const mapEmbedSrc = `https://maps.google.com/maps?q=${encodeURIComponent(salon.address)}&hl=ja&z=16&output=embed`;

@@ -1,14 +1,13 @@
 ---
 import { Image } from "astro:assets";
-import { salon, yen, type Course } from "../data/salon";
-import LineLink from "./LineLink.astro";
+import { yen, type Course } from "../data/salon";
+import BookingLinks from "./BookingLinks.astro";
 
 interface Props {
   course: Course;
 }
 
 const { course } = Astro.props;
-const line = salon.line.url;
 const sizes = {
   "01": "(min-width: 900px) 62vw, 100vw",
   "02": "(min-width: 900px) 54vw, 100vw",
@@ -18,7 +17,7 @@ const sizes = {
 } as const;
 ---
 
-<article class={`plate plate--${course.id}`} id={`course-${course.id}`} data-plate={course.id}>
+<article class:list={["plate", `plate--${course.id}`, { "plate--simple": course.id === "04" || course.id === "05" }]} id={`course-${course.id}`} data-plate={course.id}>
   {course.id === "01" && (
     <>
       <span id="menu" class="jump"></span>
@@ -33,7 +32,7 @@ const sizes = {
             {course.lines?.map((lineItem) => <li>{lineItem}</li>)}
           </ul>
           <p class="plate01__price num">{yen(course.price)}</p>
-          <LineLink href={line} />
+          <BookingLinks />
         </div>
       </div>
       <div class="plate01__media">
@@ -61,7 +60,7 @@ const sizes = {
             {course.steps?.map((step) => <li>{step}</li>)}
           </ol>
         </div>
-        <LineLink href={line} />
+        <BookingLinks />
       </div>
     </>
   )}
@@ -76,7 +75,7 @@ const sizes = {
           {course.lines?.map((lineItem) => <li>{lineItem}</li>)}
         </ul>
         <p class="num plate03__price">{yen(course.price)}</p>
-        <LineLink href={line} />
+        <BookingLinks />
       </div>
       <figure class="plate03__media">
         <Image src={course.image} alt={course.alt} class="plate__img" widths={[640, 960, 1400]} sizes={sizes["03"]} />
@@ -84,53 +83,33 @@ const sizes = {
     </>
   )}
 
-  {course.id === "04" && (
+  {(course.id === "04" || course.id === "05") && (
     <>
-      <div class="plate04__aside">
-        <div class="plate04__stage">
-          <svg class="ring" viewBox="0 0 200 200" aria-hidden="true">
-            <circle data-ring cx="100" cy="100" r="92" fill="none" stroke="currentColor" stroke-width="0.7"></circle>
-          </svg>
-          <p class="plate04__count">
-            <span class="plate04__one">1</span>
-            <span class="plate04__per">/ 月</span>
-          </p>
-          <p class="plate04__limit">{course.note}</p>
-        </div>
-        <p class="idx">04</p>
-        <h2 class="mincho plate04__title">1ヶ月<br />集中コース</h2>
-        <p class="catch">{course.catch}</p>
-        <ul class="plain">
-          {course.lines?.map((lineItem) => <li>{lineItem}</li>)}
-        </ul>
-        <p class="num plate04__price">{yen(course.price)}</p>
-        <LineLink href={line} />
+      <div class="plate03__copy">
+        <p class="idx">{course.id}</p>
+        <h2 class="mincho">
+          {course.id === "04" ? (
+            <><span class="course-title-part">1ヶ月</span><wbr /><span class="course-title-part">集中コース</span></>
+          ) : (
+            <><span class="course-title-part">脂肪冷却</span><wbr /><span class="course-title-part">6カップ</span></>
+          )}
+        </h2>
+        <p class="catch catch--lg">{course.catch}</p>
+        {course.note && <p class="course-limit">{course.note}</p>}
+        {course.lines && (
+          <ul class="plain plain--ink">
+            {course.lines.map((lineItem) => <li>{lineItem}</li>)}
+          </ul>
+        )}
+        {course.compareAt && (
+          <p class="course-compare">通常価格 <s>{yen(course.compareAt)}</s></p>
+        )}
+        <p class="num plate03__price">{yen(course.price)}</p>
+        {course.id === "05" && <p class="note">効果には個人差があります。</p>}
+        <BookingLinks />
       </div>
-      <figure class="plate04__media">
-        <Image src={course.image} alt={course.alt} class="plate__img" widths={[640, 960, 1400]} sizes={sizes["04"]} />
-      </figure>
-    </>
-  )}
-
-  {course.id === "05" && (
-    <>
-      <div class="plate05__copy">
-        <p class="idx">05</p>
-        <h2 class="mincho plate05__title">脂肪冷却<br />6カップ</h2>
-        <p class="plate05__meta">{course.catch}</p>
-        <p class="price-was">
-          <span class="price-was__label">通常</span>
-          <span class="price-was__value num">
-            {course.compareAt ? yen(course.compareAt) : ""}
-            <span class="price-was__strike" data-strike></span>
-          </span>
-        </p>
-        <p class="price-now num" data-price-now>{yen(course.price)}</p>
-        <p class="note">効果には個人差があります。</p>
-        <LineLink href={line} />
-      </div>
-      <figure class="plate05__media">
-        <Image src={course.image} alt={course.alt} class="plate__img" widths={[640, 960, 1400]} sizes={sizes["05"]} />
+      <figure class="plate03__media">
+        <Image src={course.image} alt={course.alt} class="plate__img" widths={[640, 960, 1400]} sizes={sizes[course.id]} />
       </figure>
     </>
   )}

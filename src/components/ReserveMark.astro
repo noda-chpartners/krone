@@ -1,15 +1,7 @@
 ---
-import { salon } from "../data/salon";
-import BrandIcon from "./BrandIcon.astro";
+import BookingLinks from "./BookingLinks.astro";
 ---
 
-<a
-  class="reserve"
-  href={salon.line.url}
-  target="_blank"
-  rel="noopener noreferrer"
-  aria-label="LINEで予約"
-  data-reserve
->
-  <BrandIcon brand="line" />
-</a>
+<nav class="reserve" aria-label="ご予約" data-reserve>
+  <BookingLinks compact />
+</nav>

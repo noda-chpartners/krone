@@ -1,7 +1,6 @@
 ---
 import Crown from "./Crown.astro";
-import BrandIcon from "./BrandIcon.astro";
-import { salon } from "../data/salon";
+import BookingLinks from "./BookingLinks.astro";
 ---
 
 <aside class="rail" data-rail>
@@ -13,8 +12,5 @@ import { salon } from "../data/salon";
     <a href="#menu" data-rail-item>Menu</a>
     <a href="#access" data-rail-item>Access</a>
   </nav>
-  <a class="rail__book" href={salon.line.url} target="_blank" rel="noopener noreferrer" data-rail-item>
-    <BrandIcon brand="line" />
-    LINEで予約
-  </a>
+  <BookingLinks class="rail__booking" compact />
 </aside>
